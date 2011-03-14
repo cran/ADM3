@@ -7,3 +7,4 @@ plotADM3,
 exampleADM3
 )
 exportClasses("ADM3")
+useDynLib("ADM3")
