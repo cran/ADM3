@@ -22,7 +22,8 @@ void _P(double *dat, double *prob, double *threshold, int *size) {
 	int N=(int)*size; double T=(double)*threshold; double d[N];
 	double v=var(dat, N); double m= mean(dat, N);
     for(int i=0;i<N;i++) dat[i] =(dat[i]-m)/v;		
-	for(int i=0;i<N;i++) prob[i] = pow((1/prob[i]),2);
+	//for(int i=0;i<N;i++) prob[i] = pow((1/prob[i]),2);
+	for(int i=0;i<N;i++) prob[i] = 1/(pow(prob[i],2));
 	double *dd = _FR(d, dat, prob, T, N); for(int i=0;i<N;i++) dat[i] = dd[i];
 }
 
@@ -30,12 +31,12 @@ double *_FR(double *d, double *dat, double *prob, double T, int N) {
 	double t=T; int i=0; int j=1;
 	do {
 		double q = sum(prob,i, j); double s = msum(prob, dat, i, j);
-		double sc = s/sqrt(q); d[j]=sc; 
+		double sc = abs(abs(s)/sqrt(abs(q))); d[j]=sc; 
 		if(sc>t) { 
 		double scc = sc;
-			while(sc>t & j<N & (scc/q) >= sc) { 
+			while(sc>t & j<N & scc/q >= sc) { 
 				scc=sc; j++;
-				q = sum(prob,i, j); s = msum(prob, dat, i, j); sc = s/sqrt(q);  	
+				q = sum(prob,i, j); s = msum(prob, dat, i, j); sc = abs(abs(s)/sqrt(abs(q)));  	
 			 }		
 			 for(int k=i;k<j;k++) { d[k]=sc; } i=j;
 		}

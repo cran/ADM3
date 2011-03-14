@@ -6,7 +6,7 @@
 Performs change point detection on a "bed" formatted file.
 }
 \usage{
-ADM3(file, outfile, t=6, np=3, mr=0.3, fact=3)
+ADM3(file, outfile, t=6, np=3, mr=0.3, autoCut=F)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -15,7 +15,7 @@ ADM3(file, outfile, t=6, np=3, mr=0.3, fact=3)
   \item{t}{ - the main detection threshold - controls sensitivity - not recommended below 4. }
   \item{np}{ - number of data points required to detect a feature. }
   \item{mr}{ - minimum mean ratio to detect a segemnt. }
-  \item{fact}{ - a factor used during noise dependant detection score scaling. }
+  \item{autoCut}{ - attempt noise dependant auto filtering. }
 }
 \details{
 Performs change point detection on a bed formatted file and allows an error value to be applied to each probe.\cr
